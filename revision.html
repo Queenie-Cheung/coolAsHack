@@ -1,5 +1,22 @@
 <!DOCTYPE html>
 <title>Revision</title>
 <h1>Do Revision!</h1>
-<canvas id="canvas1" width="1000" height="600"></canvas>
-<script src="revision-script.js"></script>
+<style>
+  body{
+    background-color: royalblue;
+  }
+</style>
+<iframe id="iframe" src="ball.html" width="1000" height="600"></iframe>
+<button onclick="left()">left</button><button onclick="right()">right</button>
+<script>
+let srcArray = ["ball.html","jump.html"]
+let srcNum = 0
+function left(){
+  srcNum -=1
+  document.getElementById("iframe").src = srcArray[srcNum%srcArray.length]
+}
+function right(){
+  srcNum +=1
+  document.getElementById("iframe").src = srcArray[srcNum%srcArray.length]
+}
+</script>
