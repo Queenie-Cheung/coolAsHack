@@ -1,9 +1,10 @@
 var selectedAvatarId = 1;
 
+
 function nextAvatar(avatarId) {
     // This function changes the selected avatar to the one with the avatarID + 1
     selectedAvatarId = avatarId + 1;
-    
+
 }
 
 
