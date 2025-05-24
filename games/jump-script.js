@@ -99,7 +99,7 @@ function updateState(){
   // if hero jumping
   if(jumpCtrl){
     jumpTime+=loop.dt// counting time
-    let jumpDis = jumpingDisplacement(jumpTime, 1000, hero) // displacement from original y
+    let jumpDis = jumpingDisplacement(jumpTime, 1000* (1-Math.floor(score/20)*0.25), hero) // displacement from original y
     let fallOff = jumpDis<0
     hero.y = (fallOff ? hero.oy:hero.oy-jumpDis)
     if(fallOff){
@@ -110,7 +110,7 @@ function updateState(){
   // obstacles moving
   for(let i=0;i<obstacle.length;i++){
     let ob = obstacle[i]
-    ob.x -= ob.v //moving
+    ob.x -= ob.v * (1+Math.floor(score/20)*0.25) //moving
     if(ob.x+ob.w<0){
       obstacle.splice(i,1)// removing when out of the screen
       score++
