@@ -111,7 +111,7 @@
 
 
 <body>
-  <a href ="revision.html"><img src="/images/logo.png" alt="Logo" style="width: 100px; height: 100px;"></a>
+  <a id="link" href ="revision.html"><img src="/images/logo.png" alt="Logo" style="width: 100px; height: 100px;"></a>
     <title>Avatar Selectione</title>
     <h1>Choose your Avatar</h1>
     <div class="slideshow-container">
@@ -193,7 +193,7 @@ function showSlides(n) {
 
 function chooseAvatar() {
   
-
+  document.getElementById("link").href = "revision.html?avatar=" + currentAvatar;
 }
 
     </script>
