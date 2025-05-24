@@ -1,5 +1,5 @@
 
-let canvas = document.getElementById('canvas1')
+let canvas = document.querySelector('canvas')
 let ctx = canvas.getContext('2d')
 let keys = { up: 0, down: 0, left: 0, right: 0 }
 let timeSpeed = 0

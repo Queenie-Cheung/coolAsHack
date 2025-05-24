@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<title>revision</title>
+<canvas></canvas>
+<script src="jump-script.js"></script>
+<script>
+let canvas = document.querySelector('canvas')
+window.addEventListener("resize", () => resizeCanvas())
+resizeCanvas()
+function resizeCanvas(){
+  canvas.width = window.innerWidth
+  canvas.height = window.innerHeight
+}
+</script>
