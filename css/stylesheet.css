@@ -1,0 +1,31 @@
+h1{
+  color: black;
+  text-align: center;
+  padding: 5px;
+  font-family: "Comic Sans MS"
+}
+
+h2{
+  color: black;
+  text-align: center;
+  padding: 5px;
+  font-family: "Comic Sans MS"
+}
+p{
+  color: black;
+  text-align: center;
+  padding: 5px;
+  font-family: "Comic Sans MS"
+}
+body{
+  background-color: #f0f0f0;
+  font-family: "Arial", sans-serif;
+}
+  
+a {
+  color: #1a0dab;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
