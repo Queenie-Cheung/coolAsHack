@@ -17,7 +17,7 @@ let balls = []
 let bask = {
   image: rocket,
   x: canvas.width/2,
-  y: canvas.height*7/8,
+  y: canvas.height*7/8-20,
   w: 75,
   h: 100,
   v: 9,
