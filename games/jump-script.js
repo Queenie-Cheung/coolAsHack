@@ -1,10 +1,14 @@
 let chicken = new Image()
-chicken.src = "../images/chicken.png"
+chicken.src = "../avatar1.jpg"
 let ghost = new Image()
 ghost.src = "../images/ghost.png"
 let grass = new Image()
 grass.src = "../images/grass.png"
+let cloud = new Image()
+cloud.src = "../image/cloud.png"
 
+
+let words = ["algorithm","binary","bit","byte","CPU","cache","compiler","compression","cybersecurity","data","database","debugging","decomposition","denary","encryption","function","hardware","hexadecimal","input","iteration","logic gate","loop","memory","network","output","pixel","program","pseudocode","RAM","ROM","register","software","syntax","variable","while loop","TCP/IP","IP address","boolean","machine code","overflow error"]
 function jumpingDisplacement(time, maxt, hero){
   let maxh = hero.h*2 // maximum height
   //let maxt = 1000 // time when land after jump
@@ -31,6 +35,8 @@ let hero = {
   },
 }
 
+
+
 class Things{
   x = canvas.width
   v = 2
@@ -49,8 +55,23 @@ class Bird extends Things{
   h = hero.h/2
   colour = "blue"
 }
+class Cloud extends Things{
+  image = cloud
+  y = hero.oy-hero.h-20
+  w = 100
+  h = 50
+  colour = "white"
+}
+class Words extends Things{
+  text = words[Math.floor(Math.random()*words.length)]
+  w = random(hero.w*1.5,30)
+  h = hero.h/3*2
+  y = hero.oy + hero.h - this.h
+  colour = "black"
+}
 
 let obstacle = []
+let cloudArray = []
 let score = 0
 let lose = false
 
@@ -101,11 +122,15 @@ function updateState(){
   // obstacles spawning
   lastTime += loop.dt
   if(lastTime>=1250){
-    if(Math.random()<0.4){// 40% spawning somwthing each frame
+    if(Math.random()<0.5){// 40% spawning somwthing each frame
       let dice = Math.random()
-      if(dice<0.7)obstacle.push(new Cactus)// 70%
+      if(dice<0.3)obstacle.push(new Cactus)// 40%
+      else if(dice<0.8)obstacle.push(new Words)//30%
       else obstacle.push(new Bird) // 30%
       lastTime = 0
+    }
+    if(Math.random()<0.3){
+      cloudArray.push(new Cloud)
     }
   }
 }
@@ -113,11 +138,17 @@ function updateState(){
 function drawState(){
   ctx.fillStyle = "black"
   ctx.fillRect(0,hero.oy+canvas.height/3+hero.h,canvas.width,2)
-  for(let a of [hero]){//...obstacle,hero]){
+  for(let a of [...obstacle,hero]){
     ctx.fillStyle = a.colour
-    ctx.drawImage(a.image,a.x,a.y+canvas.height/3,a.w,a.h)
-
+    if(a.image)ctx.drawImage(a.image,a.x,a.y+canvas.height/3,a.w,a.h)
+    else ctx.fillText(a.text,a.x,a.y+canvas.height/3,a.w)
   }
+    // for(let a of cloudArray){
+    // ctx.fillStyle = a.colour
+    // ctx.globalAlpha = 0.6
+    // ctx.drawImage(a.image,a.x,a.y+canvas.height/3,a.w,a.h)
+    // ctx.globalAlpha = 1
+  //}
   if(lose){
     ctx.fillStyle = "black"
     ctx.font = '24px Verdana'
