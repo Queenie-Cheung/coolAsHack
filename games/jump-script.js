@@ -1,5 +1,9 @@
+const urlParams = new URLSearchParams(window.location.search);//copied from somewhere on internet
 let chicken = new Image()
-chicken.src = "../avatar1.jpg"
+let avaNum = urlParams.get("avatar")? urlParams.get("avatar"):1
+console.log(avaNum)
+let avaArr = ["../avatar1.jpg","../avatar2.jpg","../avatar3.jpg"]
+chicken.src = avaArr[avaNum]
 let ghost = new Image()
 ghost.src = "../images/ghost.png"
 let grass = new Image()
@@ -135,7 +139,14 @@ function updateState(){
   }
 }
 
+let tree = new Image()
+tree.src = "../images/tree.jpeg"
+let loseImg = new Image()
+loseImg.src = "../images/A.jpeg"
 function drawState(){
+  ctx.globalAlpha = 0.5
+  ctx.drawImage(tree,0,0,canvas.width,canvas.height)
+  ctx.globalAlpha = 1
   ctx.fillStyle = "black"
   ctx.fillRect(0,hero.oy+canvas.height/3+hero.h,canvas.width,2)
   for(let a of [...obstacle,hero]){
@@ -154,6 +165,7 @@ function drawState(){
     ctx.font = '24px Verdana'
     ctx.fillText("Game Over",100,hero.oy-hero.h+canvas.height/3)
     ctx.fillText(`Score: ${score}`,100,hero.oy-hero.h+50+canvas.height/3)
+    ctx.drawImage(loseImg,250,hero.oy-hero.h+50+canvas.height/3-50,200,200)
   }
   else {
     ctx.font = '24px Verdana'

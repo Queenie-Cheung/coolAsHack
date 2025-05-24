@@ -11,6 +11,8 @@ let longerWords = ["energy","reaction","enzyme","carbon","oxygen","fusion","fiss
 
 let rocket = new Image()
 rocket.src = "../images/rocket.png"
+let night = new Image()
+night.src = "../images/night.jpg"
 let balls = []
 let bask = {
   image: rocket,
@@ -56,7 +58,12 @@ function updateState () {
   if(bask.x>canvas.width-bask.w)bask.x=canvas.width-bask.w
 }
 
+let time = 0
+setInterval(()=>time++,1000)
 function drawState () {
+  ctx.globalAlpha = 0.5
+  ctx.drawImage(night,0,0,canvas.width,canvas.height)
+  ctx.globalAlpha = 1
   for (let ball of balls){
     ctx.fillStyle = ball.colour
     ctx.fillText(ball.text,ball.x-ball.r,ball.y)
@@ -65,7 +72,7 @@ function drawState () {
   ctx.drawImage(bask.image,bask.x,bask.y,bask.w,bask.h)
   ctx.fillStyle = "white"
   ctx.font = '24px Verdana'
-  ctx.fillText("Score: "+scoreGlo,10,20)
+  ctx.fillText("Score: "+scoreGlo+"  Timer: "+time,10,20)
 }
 
 /*window.onpointerdown = (e) => mouse(e)
