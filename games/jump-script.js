@@ -43,7 +43,7 @@ let hero = {
 
 class Things{
   x = canvas.width
-  v = 7*300/canvas.width
+  v = 7*600/canvas.width
 }
 class Cactus extends Things{
   image = grass
