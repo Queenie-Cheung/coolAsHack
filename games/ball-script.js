@@ -6,13 +6,18 @@ let timeSpeed = 0
 let scoreUp = false
 let scoreGlo = 0
 let random = (max,min=0) => Math.floor(Math.random()*(max-min)+min)//0-max
+let shorterWords = ["atom","cell","ions","mass","acid","base","pH","gas","ion","salt","iron","coal","oil","test","light","solid","force","plant","metal","neutr"]
+let longerWords = ["energy","reaction","enzyme","carbon","oxygen","fusion","fission","neuron","proton","electron","solvent","current","circuit","voltage","gravity","density","molecule","evaporation","diffusion"]
 
+let rocket = new Image()
+rocket.src = "../images/rocket.png"
 let balls = []
 let bask = {
+  image: rocket,
   x: canvas.width/2,
   y: canvas.height*7/8,
   w: 75,
-  h: 5,
+  h: 100,
   v: 9,
   colour: "black"
 }
@@ -53,15 +58,12 @@ function updateState () {
 
 function drawState () {
   for (let ball of balls){
-  ctx.beginPath()
-  ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2)
-  ctx.fillStyle = ball.colour
-  ctx.fill()
-  ctx.stroke()
+    ctx.fillStyle = ball.colour
+    ctx.fillText(ball.text,ball.x-ball.r,ball.y)
   }
-  ctx.fillStyle = bask.colour
-  ctx.fillRect(bask.x,bask.y,bask.w,bask.h)
-  ctx.fillStyle = "black"
+  //ctx.fillStyle = bask.colour
+  ctx.drawImage(bask.image,bask.x,bask.y,bask.w,bask.h)
+  ctx.fillStyle = "white"
   ctx.font = '24px Verdana'
   ctx.fillText("Score: "+scoreGlo,10,20)
 }
@@ -100,6 +102,7 @@ class Ball{
 }
 
 class RedBall extends Ball {//bomb
+  text = "bomb"
   r = 10
   vy = 5
   score = -3
@@ -112,21 +115,24 @@ class RedBall extends Ball {//bomb
   }
 }
 class WhiteBall extends Ball{//normal
-  r = 10
+  text = longerWords[random(longerWords.length)]
+  r = this.text.length/2
   vy = 5
-  colour = 'whitesmoke'
+  colour = 'grey'
   score = 1
 }
 class BlueBall extends Ball {//extra point
-  r = 5
+  text = shorterWords[random(shorterWords.length)]
+  r = this.text.length/2//5
   vy = 7
-  colour = 'blue'
+  colour = 'lightblue'
   score = 5
 }
 class GreenBall extends Ball{//extra speed
-  r = 4
+  text = shorterWords[random(shorterWords.length)]
+  r = this.text.length/2
   vy = 7.5
-  colour = 'green'
+  colour = 'lightgreen'
   score = 3
   buffNum = 3
   buffTime = 10000
@@ -141,7 +147,8 @@ class GreenBall extends Ball{//extra speed
   }
 }
 class YellowBall extends Ball{//score*3
-  r = 4
+  text = shorterWords[random(shorterWords.length)]
+  r = this.text.length/2
   vy = 7.5
   colour = 'yellow'
   score = 1
